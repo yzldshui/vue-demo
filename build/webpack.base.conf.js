@@ -49,10 +49,11 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader?cacheDirectory',
+        loader: 'babel-loader',
         include: [
           resolve('src'),
           resolve('test'),
+          resolve('mock'),
           resolve('node_modules/webpack-dev-server/client')
         ]
       },

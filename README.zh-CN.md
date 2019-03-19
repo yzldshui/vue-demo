@@ -1,2 +1,0 @@
-# vue-demo
-vue training
