@@ -39,11 +39,50 @@ export const constantRouterMap = [
   },
 
   {
+    path: '/base1',
+    component: Layout,
+    name: 'base1',
+    meta: { title: 'Vue基础', icon: 'example' },
+    children: [
+      {
+        path: 'b1',
+        name: 'b1',
+        component: () => import('@/views/demo/demo1'),
+        meta: { title: 'Base', icon: 'form' }
+      },
+      {
+        path: 'b2',
+        name: 'b2',
+        component: () => import('@/views/demo/demo2'),
+        meta: { title: 'Data', icon: 'form' }
+      },
+      {
+        path: 'b3',
+        name: 'b3',
+        component: () => import('@/views/demo/demo3'),
+        meta: { title: 'Method', icon: 'form' }
+      },
+      {
+        path: 'b4',
+        name: 'b4',
+        component: () => import('@/views/demo/demo4'),
+        meta: { title: 'Components', icon: 'form' }
+      },
+      {
+        path: 'b5',
+        name: 'b5',
+        component: () => import('@/views/demo/demo5'),
+        meta: { title: '生命周期', icon: 'form' }
+      }
+    ]
+  },
+
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
     name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
+    meta: { title: 'Element-UI', icon: 'example' },
     children: [
       {
         path: 'table',
@@ -56,88 +95,12 @@ export const constantRouterMap = [
         name: 'Tree',
         component: () => import('@/views/tree/index'),
         meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
-  },
-
-  {
-    path: '/form',
-    component: Layout,
-    children: [
+      },
       {
         path: 'index',
         name: 'Form',
         component: () => import('@/views/form/index'),
         meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
-
-  {
-    path: '/nested',
-    component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: 'Nested',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        meta: { title: 'menu2' }
-      }
-    ]
-  },
-
-  {
-    path: 'external-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
       }
     ]
   },
