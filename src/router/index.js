@@ -78,33 +78,6 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/high',
-    component: Layout,
-    name: 'high',
-    meta: { title: 'Vue进阶', icon: 'example' },
-    children: [
-      {
-        path: 'h1',
-        name: 'h1',
-        component: () => import('@/views/high/high1'),
-        meta: { title: 'Filters', icon: 'form' }
-      },
-      {
-        path: 'h2',
-        name: 'h2',
-        component: () => import('@/views/high/high2'),
-        meta: { title: 'Watch', icon: 'form' }
-      },
-      {
-        path: 'h3',
-        name: 'h3',
-        component: () => import('@/views/high/high3'),
-        meta: { title: 'Slot', icon: 'form' }
-      }
-    ]
-  },
-
-  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
@@ -114,35 +87,20 @@ export const constantRouterMap = [
       {
         path: 'table',
         name: 'Table',
-        component: () => import('@/views/elementui/table/index'),
+        component: () => import('@/views/table/index'),
         meta: { title: 'Table', icon: 'table' }
       },
       {
         path: 'tree',
         name: 'Tree',
-        component: () => import('@/views/elementui/tree/index'),
+        component: () => import('@/views/tree/index'),
         meta: { title: 'Tree', icon: 'tree' }
       },
       {
         path: 'index',
         name: 'Form',
-        component: () => import('@/views/elementui/form/index'),
+        component: () => import('@/views/form/index'),
         meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
-
-  {
-    path: '/hw',
-    component: Layout,
-    name: 'Hw',
-    meta: { title: 'Element-UI', icon: 'example' },
-    children: [
-      {
-        path: 'hw',
-        name: 'hw',
-        component: () => import('@/views/dashboard/hw'),
-        meta: { title: 'Homework', icon: 'table' }
       }
     ]
   },
