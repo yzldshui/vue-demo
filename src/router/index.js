@@ -66,7 +66,7 @@ export const constantRouterMap = [
         path: 'b4',
         name: 'b4',
         component: () => import('@/views/demo/demo4'),
-        meta: { title: 'Components', icon: 'form' }
+        meta: { title: 'Components Base', icon: 'form' }
       },
       {
         path: 'b5',
@@ -100,6 +100,12 @@ export const constantRouterMap = [
         name: 'h3',
         component: () => import('@/views/high/high3'),
         meta: { title: 'Slot', icon: 'form' }
+      },
+      {
+        path: 'h4',
+        name: 'h4',
+        component: () => import('@/views/high/high4'),
+        meta: { title: 'Components 2', icon: 'form' }
       }
     ]
   },
