@@ -66,7 +66,7 @@ export const constantRouterMap = [
         path: 'b4',
         name: 'b4',
         component: () => import('@/views/demo/demo4'),
-        meta: { title: 'Components', icon: 'form' }
+        meta: { title: 'Components Base', icon: 'form' }
       },
       {
         path: 'b5',
@@ -100,6 +100,40 @@ export const constantRouterMap = [
         name: 'h3',
         component: () => import('@/views/high/high3'),
         meta: { title: 'Slot', icon: 'form' }
+      },
+      {
+        path: 'h4',
+        name: 'h4',
+        component: () => import('@/views/high/high4'),
+        meta: { title: 'Components 2', icon: 'form' }
+      }
+    ]
+  },
+
+  {
+    path: '/other',
+    component: Layout,
+    name: 'other',
+    meta: { title: 'Vue配套', icon: 'example' },
+    children: [
+      {
+        path: 'o1',
+        name: 'o1',
+        component: () => import('@/views/other/other1'),
+        meta: { title: 'Router', icon: 'form' }
+      },
+      {
+        path: 'o11',
+        name: 'o11',
+        hidden: true,
+        component: () => import('@/views/other/other11'),
+        meta: { title: 'Router2', icon: 'form' }
+      },
+      {
+        path: 'o2',
+        name: 'o2',
+        component: () => import('@/views/other/other2'),
+        meta: { title: 'Vuex', icon: 'form' }
       }
     ]
   },

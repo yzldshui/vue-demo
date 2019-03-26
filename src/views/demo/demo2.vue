@@ -18,8 +18,9 @@
     </div>
     <div class="demo-b">
       <p>{{ data5 }}</p>
-      <p>{{ data5.Fujian[0].key }}</p>
+      <p>{{ data5[0].value }}</p>
       <button @click="handleClick">CLick me</button>
+      <el-checkbox v-model="data5[0].value" />
     </div>
   </div>
 </template>
@@ -36,23 +37,20 @@ export default {
         { key: '002', value: 'Shanghai' },
         { key: '003', value: 'Xiamen' }
       ],
-      data5: {
-        'Fujian': [
-          { key: '001', value: 'Fuzhou' },
-          { key: '002', value: 'Quanzhou' },
-          { key: '003', value: 'Xiamen' }
-        ],
-        'Guangdong': [
-          { key: '001', value: 'Shantou' },
-          { key: '002', value: 'Shenzhen' },
-          { key: '003', value: 'Guangzhou' }
-        ]
-      }
+      data5: [
+        { value: true }
+      ]
     }
   },
   methods: {
     handleClick() {
-      this.data5.Fujian[0].key = '100'
+      const flag = this.data5[0].value
+      // 1
+      this.data5[0] = { value: !flag }
+      // 2
+      // this.$set(this.data5, 0, { value: !flag })
+      // 3
+      // this.data5[0].value = !flag
     }
   }
 }
