@@ -105,6 +105,34 @@ export const constantRouterMap = [
   },
 
   {
+    path: '/other',
+    component: Layout,
+    name: 'other',
+    meta: { title: 'Vue配套', icon: 'example' },
+    children: [
+      {
+        path: 'o1',
+        name: 'o1',
+        component: () => import('@/views/other/other1'),
+        meta: { title: 'Router', icon: 'form' }
+      },
+      {
+        path: 'o11',
+        name: 'o11',
+        hidden: true,
+        component: () => import('@/views/other/other11'),
+        meta: { title: 'Router2', icon: 'form' }
+      },
+      {
+        path: 'o2',
+        name: 'o2',
+        component: () => import('@/views/other/other2'),
+        meta: { title: 'Vuex', icon: 'form' }
+      }
+    ]
+  },
+
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
