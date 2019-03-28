@@ -167,6 +167,22 @@ export const constantRouterMap = [
   },
 
   {
+    path: '/homework',
+    component: Layout,
+    name: 'Homework',
+    alwaysShow: true,
+    meta: { title: '我的作业', icon: 'example' },
+    children: [
+      {
+        path: 'todolist',
+        name: 'Todolist',
+        component: () => import('@/views/homework/todolist'),
+        meta: { title: 'Todo list 小工具', icon: 'table' }
+      }
+    ]
+  },
+
+  {
     path: '/hw',
     component: Layout,
     name: 'Hw',
