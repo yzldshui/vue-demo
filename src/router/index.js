@@ -187,6 +187,27 @@ export const constantRouterMap = [
     ]
   },
 
+  {
+    path: '/sample',
+    component: Layout,
+    name: 'sample',
+    meta: { title: 'Sapmle', icon: 'example' },
+    children: [
+      {
+        path: 'sample1',
+        name: 'sample1',
+        component: () => import('@/views/sample/sample1'),
+        meta: { title: 'Sample1', icon: 'table' }
+      },
+      {
+        path: 'sample2',
+        name: 'sample2',
+        component: () => import('@/views/sample/sample2'),
+        meta: { title: 'Sample2', icon: 'table' }
+      }
+    ]
+  },
+
   { path: '*', redirect: '/404', hidden: true }
 ]
 
