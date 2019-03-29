@@ -179,10 +179,10 @@ export const constantRouterMap = [
         meta: { title: 'Homework', icon: 'table' }
       },
       {
-        path: 'tl',
-        name: 'tl',
-        component: () => import('@/views/todolist/index'),
-        meta: { title: 'Todo List', icon: 'table' }
+        path: 'myhw',
+        name: 'myhw',
+        component: () => import('@/views/dashboard/myhw'),
+        meta: { title: 'MyHomework', icon: 'table' }
       }
     ]
   },
