@@ -1,7 +1,10 @@
 <template>
   <div class="app-container">
-    <input v-model="content" type="text">
-    <el-button type="ghost" @click="add()">add</el-button>
+    <div style="margin-bottom:10px">
+      <el-input v-model="content" placeholder="请输入" style="width:80%"/>
+      <el-button type="ghost" @click="add()">add</el-button>
+    </div>
+
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -18,9 +21,10 @@
           {{ scope.row.content }}
         </template>
       </el-table-column>
-      <el-table-column class-name="status-col" label="Status" width="110" click="changeStatus(scope.row.status,scope.$index)" align="center">
+      <el-table-column class-name="status-col" label="Status" width="220" click="changeStatus(scope.row.status,scope.$index)" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status | statusFilter }}</el-tag>
+          <el-button :disabled="scope.row.status===70" :type="scope.row.status | typeFilter" size="min" @click="changeStatus(scope.row.status,scope.$index)">{{ scope.row.status | statusFilter }}</el-button>
+          <el-button :disabled="scope.row.status===70" size="min" type="danger" @click="deleteRow(scope.$index)">删除</el-button>
         </template>
       </el-table-column>
       <el-table-column align="center" prop="created_time" label="Display_time" width="200">
@@ -43,12 +47,25 @@ export default {
         70: '已完成'
       }
       return statusMap[status]
+    },
+    typeFilter(status) {
+      const statusMap = {
+        10: 'info',
+        30: 'primary',
+        70: 'success'
+      }
+      return statusMap[status]
     }
   },
   data() {
     return {
-      content: 'dd',
-      list: new Array({ 'content': 'todo', 'status': 10, 'create_time': new Date() })
+      content: '',
+      listLoading: false,
+      list: [],
+      sMap: {
+        10: 30,
+        30: 70
+      }
     }
   },
   created() {
@@ -56,14 +73,19 @@ export default {
   },
   methods: {
     add() {
-      // if (!this.list) {
-      //   this.list = new Array()
-      // }
+      if (!this.content) {
+        this.$message.warning('内容不能为空！')
+        return
+      }
       var c = this.content
       this.list.push({ 'content': c, 'status': 10, 'create_time': new Date() })
     },
     changeStatus(status, idx) {
-      this.list[idx].status = 30
+      this.list[idx].status = this.sMap[status]
+    },
+    deleteRow(idx) {
+      console.log(idx)
+      this.list.splice(idx, 1)
     }
   }
 }
