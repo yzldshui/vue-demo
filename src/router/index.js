@@ -177,6 +177,12 @@ export const constantRouterMap = [
         name: 'hw',
         component: () => import('@/views/dashboard/hw'),
         meta: { title: 'Homework', icon: 'table' }
+      },
+      {
+        path: 'myhw',
+        name: 'myhw',
+        component: () => import('@/views/dashboard/myhw'),
+        meta: { title: 'MyHomework', icon: 'table' }
       }
     ]
   },
