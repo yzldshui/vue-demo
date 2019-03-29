@@ -106,6 +106,12 @@ export const constantRouterMap = [
         name: 'h4',
         component: () => import('@/views/high/high4'),
         meta: { title: 'Components 2', icon: 'form' }
+      },
+      {
+        path: 'h5',
+        name: 'h5',
+        component: () => import('@/views/high/high5'),
+        meta: { title: 'homework', icon: 'form' }
       }
     ]
   },
