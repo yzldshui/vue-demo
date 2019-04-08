@@ -109,9 +109,9 @@ export default {
 }
 </script>
 <style type="text/css">
-		span {
+		/* span {
       margin-left:30px;
-    }
+    } */
     span[name="total"] {
        color:black;
     }
