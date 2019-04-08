@@ -167,27 +167,6 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/hw',
-    component: Layout,
-    name: 'Hw',
-    meta: { title: 'Homework', icon: 'example' },
-    children: [
-      {
-        path: 'hw',
-        name: 'hw',
-        component: () => import('@/views/dashboard/hw'),
-        meta: { title: 'Homework', icon: 'table' }
-      },
-      {
-        path: 'tl',
-        name: 'tl',
-        component: () => import('@/views/todolist/index'),
-        meta: { title: 'Todo List', icon: 'table' }
-      }
-    ]
-  },
-
-  {
     path: '/sample',
     component: Layout,
     name: 'sample',
@@ -204,6 +183,51 @@ export const constantRouterMap = [
         name: 'sample2',
         component: () => import('@/views/sample/sample2'),
         meta: { title: 'Sample2', icon: 'table' }
+      }
+    ]
+  },
+
+  {
+    path: '/hw',
+    component: Layout,
+    name: 'Hw',
+    meta: { title: 'Homework', icon: 'example' },
+    children: [
+      {
+        path: 'hw',
+        name: 'hw',
+        component: () => import('@/views/dashboard/hw'),
+        meta: { title: 'Homework', icon: 'table' }
+      },
+      {
+        path: 'tl',
+        name: 'tl',
+        component: () => import('@/views/todolist/index'),
+        meta: { title: 'Todo List', icon: 'table' }
+      },
+      {
+        path: 'chentao',
+        name: 'chentao',
+        component: () => import('@/views/hw/chentao/index'),
+        meta: { title: 'chentao', icon: 'table' }
+      },
+      {
+        path: 'lishaorong',
+        name: 'lishaorong',
+        component: () => import('@/views/hw/lishaorong/index'),
+        meta: { title: 'lishaorong', icon: 'table' }
+      },
+      {
+        path: 'linanqi',
+        name: 'linanqi',
+        component: () => import('@/views/hw/linanqi/index'),
+        meta: { title: 'linanqi', icon: 'table' }
+      },
+      {
+        path: 'luoxiangyu',
+        name: 'luoxiangyu',
+        component: () => import('@/views/hw/luoxiangyu/index'),
+        meta: { title: 'luoxiangyu', icon: 'table' }
       }
     ]
   },
