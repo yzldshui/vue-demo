@@ -2,7 +2,7 @@
   <div>
     <div class="demo-b">
       <ul style="list-style-type:none">
-        <li v-for="item in datalist" :key="item">
+        <li v-for="item in datalist" :key="item.name">
           <span :style="{color:toColor(item.status)}">{{ item.name }}</span>
           <el-button @click="deleteOne(item.name)"> x </el-button ><el-button :disabled="item.status>2" @click="changeStatus(item.name)">{{ item.status | filter1 }} </el-button>
         </li>
