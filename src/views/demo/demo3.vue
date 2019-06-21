@@ -1,11 +1,6 @@
 <template>
   <div class="app-container">
-    <div class="demo-b">
-      <p :class="{active: isActive}" :style="{backgroundColor: color, width: '100px'}">txt</p>
-      <p>active: {{ isActive }}</p>
-      <button @click="handleClick">Change Color</button>
-      <button @click="handleClick2">Change Background</button>
-    </div>
+    欢迎脚泥老师大驾光临
   </div>
 </template>
 

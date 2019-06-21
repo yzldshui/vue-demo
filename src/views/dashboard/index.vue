@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    <h2>Welcome Vue!</h2>
+    <h2>Welcome Johnny!</h2>
   </div>
 </template>
 

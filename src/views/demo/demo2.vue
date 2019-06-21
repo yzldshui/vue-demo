@@ -1,27 +1,6 @@
 <template>
   <div class="app-container">
-    <div class="demo-b">
-      <p>{{ data1 }}</p>
-    </div>
-    <div class="demo-b">
-      <p>{{ data2 }}</p>
-      <p>{{ data2[0] }}</p>
-    </div>
-    <div class="demo-b">
-      <p>{{ data3 }}</p>
-      <p>{{ data3.key }}</p>
-    </div>
-    <div class="demo-b">
-      <p>{{ data4 }}</p>
-      <p>{{ data4[0] }}</p>
-      <p>{{ data4[0].key }}</p>
-    </div>
-    <div class="demo-b">
-      <p>{{ data5 }}</p>
-      <p>{{ data5[0].value }}</p>
-      <button @click="handleClick">CLick me</button>
-      <el-checkbox v-model="data5[0].value" />
-    </div>
+    欢迎脚泥老师大驾光临
   </div>
 </template>
 

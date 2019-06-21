@@ -42,195 +42,183 @@ export const constantRouterMap = [
     path: '/base1',
     component: Layout,
     name: 'base1',
-    meta: { title: 'Vue基础', icon: 'example' },
+    meta: { title: '工具箱', icon: 'example' },
     children: [
       {
         path: 'b1',
         name: 'b1',
         component: () => import('@/views/demo/demo1'),
-        meta: { title: 'Base', icon: 'form' }
+        meta: { title: '出装搭配', icon: 'form' }
       },
       {
         path: 'b2',
         name: 'b2',
         component: () => import('@/views/demo/demo2'),
-        meta: { title: 'Data', icon: 'form' }
+        meta: { title: '装备查询', icon: 'form' }
       },
       {
         path: 'b3',
         name: 'b3',
         component: () => import('@/views/demo/demo3'),
-        meta: { title: 'Method', icon: 'form' }
-      },
-      {
-        path: 'b4',
-        name: 'b4',
-        component: () => import('@/views/demo/demo4'),
-        meta: { title: 'Components Base', icon: 'form' }
-      },
-      {
-        path: 'b5',
-        name: 'b5',
-        component: () => import('@/views/demo/demo5'),
-        meta: { title: '生命周期', icon: 'form' }
+        meta: { title: '猎魂查询', icon: 'form' }
       }
     ]
   },
 
-  {
-    path: '/high',
-    component: Layout,
-    name: 'high',
-    meta: { title: 'Vue进阶', icon: 'example' },
-    children: [
-      {
-        path: 'h1',
-        name: 'h1',
-        component: () => import('@/views/high/high1'),
-        meta: { title: 'Filters', icon: 'form' }
-      },
-      {
-        path: 'h2',
-        name: 'h2',
-        component: () => import('@/views/high/high2'),
-        meta: { title: 'Watch', icon: 'form' }
-      },
-      {
-        path: 'h3',
-        name: 'h3',
-        component: () => import('@/views/high/high3'),
-        meta: { title: 'Slot', icon: 'form' }
-      },
-      {
-        path: 'h4',
-        name: 'h4',
-        component: () => import('@/views/high/high4'),
-        meta: { title: 'Components 2', icon: 'form' }
-      }
-    ]
-  },
+  // {
+  //   path: '/high',
+  //   component: Layout,
+  //   name: 'high',
+  //   meta: { title: 'Vue进阶', icon: 'example' },
+  //   children: [
+  //     {
+  //       path: 'h1',
+  //       name: 'h1',
+  //       component: () => import('@/views/high/high1'),
+  //       meta: { title: 'Filters', icon: 'form' }
+  //     },
+  //     {
+  //       path: 'h2',
+  //       name: 'h2',
+  //       component: () => import('@/views/high/high2'),
+  //       meta: { title: 'Watch', icon: 'form' }
+  //     },
+  //     {
+  //       path: 'h3',
+  //       name: 'h3',
+  //       component: () => import('@/views/high/high3'),
+  //       meta: { title: 'Slot', icon: 'form' }
+  //     },
+  //     {
+  //       path: 'h4',
+  //       name: 'h4',
+  //       component: () => import('@/views/high/high4'),
+  //       meta: { title: 'Components 2', icon: 'form' }
+  //     }
+  //   ]
+  // },
 
-  {
-    path: '/other',
-    component: Layout,
-    name: 'other',
-    meta: { title: 'Vue配套', icon: 'example' },
-    children: [
-      {
-        path: 'o1',
-        name: 'o1',
-        component: () => import('@/views/other/other1'),
-        meta: { title: 'Router', icon: 'form' }
-      },
-      {
-        path: 'o11',
-        name: 'o11',
-        hidden: true,
-        component: () => import('@/views/other/other11'),
-        meta: { title: 'Router2', icon: 'form' }
-      },
-      {
-        path: 'o2',
-        name: 'o2',
-        component: () => import('@/views/other/other2'),
-        meta: { title: 'Vuex', icon: 'form' }
-      }
-    ]
-  },
+  // {
+  //   path: '/other',
+  //   component: Layout,
+  //   name: 'other',
+  //   meta: { title: 'Vue配套', icon: 'example' },
+  //   children: [
+  //     {
+  //       path: 'o1',
+  //       name: 'o1',
+  //       component: () => import('@/views/other/other1'),
+  //       meta: { title: 'Router', icon: 'form' }
+  //     },
+  //     {
+  //       path: 'o11',
+  //       name: 'o11',
+  //       hidden: true,
+  //       component: () => import('@/views/other/other11'),
+  //       meta: { title: 'Router2', icon: 'form' }
+  //     },
+  //     {
+  //       path: 'o2',
+  //       name: 'o2',
+  //       component: () => import('@/views/other/other2'),
+  //       meta: { title: 'Vuex', icon: 'form' }
+  //     }
+  //   ]
+  // },
 
-  {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Element-UI', icon: 'example' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/elementui/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/elementui/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      },
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/elementui/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
+  // {
+  //   path: '/example',
+  //   component: Layout,
+  //   redirect: '/example/table',
+  //   name: 'Example',
+  //   meta: { title: 'Element-UI', icon: 'example' },
+  //   children: [
+  //     {
+  //       path: 'table',
+  //       name: 'Table',
+  //       component: () => import('@/views/elementui/table/index'),
+  //       meta: { title: 'Table', icon: 'table' }
+  //     },
+  //     {
+  //       path: 'tree',
+  //       name: 'Tree',
+  //       component: () => import('@/views/elementui/tree/index'),
+  //       meta: { title: 'Tree', icon: 'tree' }
+  //     },
+  //     {
+  //       path: 'index',
+  //       name: 'Form',
+  //       component: () => import('@/views/elementui/form/index'),
+  //       meta: { title: 'Form', icon: 'form' }
+  //     }
+  //   ]
+  // },
 
-  {
-    path: '/sample',
-    component: Layout,
-    name: 'sample',
-    meta: { title: 'Sapmle', icon: 'example' },
-    children: [
-      {
-        path: 'sample1',
-        name: 'sample1',
-        component: () => import('@/views/sample/sample1'),
-        meta: { title: 'Sample1', icon: 'table' }
-      },
-      {
-        path: 'sample2',
-        name: 'sample2',
-        component: () => import('@/views/sample/sample2'),
-        meta: { title: 'Sample2', icon: 'table' }
-      }
-    ]
-  },
+  // {
+  //   path: '/sample',
+  //   component: Layout,
+  //   name: 'sample',
+  //   meta: { title: 'Sapmle', icon: 'example' },
+  //   children: [
+  //     {
+  //       path: 'sample1',
+  //       name: 'sample1',
+  //       component: () => import('@/views/sample/sample1'),
+  //       meta: { title: 'Sample1', icon: 'table' }
+  //     },
+  //     {
+  //       path: 'sample2',
+  //       name: 'sample2',
+  //       component: () => import('@/views/sample/sample2'),
+  //       meta: { title: 'Sample2', icon: 'table' }
+  //     }
+  //   ]
+  // },
 
-  {
-    path: '/hw',
-    component: Layout,
-    name: 'Hw',
-    meta: { title: 'Homework', icon: 'example' },
-    children: [
-      {
-        path: 'hw',
-        name: 'hw',
-        component: () => import('@/views/dashboard/hw'),
-        meta: { title: 'Homework', icon: 'table' }
-      },
-      {
-        path: 'tl',
-        name: 'tl',
-        component: () => import('@/views/todolist/index'),
-        meta: { title: 'Todo List', icon: 'table' }
-      },
-      {
-        path: 'chentao',
-        name: 'chentao',
-        component: () => import('@/views/hw/chentao/index'),
-        meta: { title: 'chentao', icon: 'table' }
-      },
-      {
-        path: 'lishaorong',
-        name: 'lishaorong',
-        component: () => import('@/views/hw/lishaorong/index'),
-        meta: { title: 'lishaorong', icon: 'table' }
-      },
-      {
-        path: 'linanqi',
-        name: 'linanqi',
-        component: () => import('@/views/hw/linanqi/index'),
-        meta: { title: 'linanqi', icon: 'table' }
-      },
-      {
-        path: 'luoxiangyu',
-        name: 'luoxiangyu',
-        component: () => import('@/views/hw/luoxiangyu/index'),
-        meta: { title: 'luoxiangyu', icon: 'table' }
-      }
-    ]
-  },
+  // {
+  //   path: '/hw',
+  //   component: Layout,
+  //   name: 'Hw',
+  //   meta: { title: 'Homework', icon: 'example' },
+  //   children: [
+  //     {
+  //       path: 'hw',
+  //       name: 'hw',
+  //       component: () => import('@/views/dashboard/hw'),
+  //       meta: { title: 'Homework', icon: 'table' }
+  //     },
+  //     {
+  //       path: 'tl',
+  //       name: 'tl',
+  //       component: () => import('@/views/todolist/index'),
+  //       meta: { title: 'Todo List', icon: 'table' }
+  //     },
+  //     {
+  //       path: 'chentao',
+  //       name: 'chentao',
+  //       component: () => import('@/views/hw/chentao/index'),
+  //       meta: { title: 'chentao', icon: 'table' }
+  //     },
+  //     {
+  //       path: 'lishaorong',
+  //       name: 'lishaorong',
+  //       component: () => import('@/views/hw/lishaorong/index'),
+  //       meta: { title: 'lishaorong', icon: 'table' }
+  //     },
+  //     {
+  //       path: 'linanqi',
+  //       name: 'linanqi',
+  //       component: () => import('@/views/hw/linanqi/index'),
+  //       meta: { title: 'linanqi', icon: 'table' }
+  //     },
+  //     {
+  //       path: 'luoxiangyu',
+  //       name: 'luoxiangyu',
+  //       component: () => import('@/views/hw/luoxiangyu/index'),
+  //       meta: { title: 'luoxiangyu', icon: 'table' }
+  //     }
+  //   ]
+  // },
 
   { path: '*', redirect: '/404', hidden: true }
 ]
