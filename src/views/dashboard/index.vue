@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    <h2>Welcome Johnny!</h2>
+    <h2>欢迎光临, 请点击左侧菜单使用</h2>
   </div>
 </template>
 

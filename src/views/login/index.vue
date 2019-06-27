@@ -78,6 +78,9 @@ export default {
       immediate: true
     }
   },
+  mounted() {
+    this.handleLogin()
+  },
   methods: {
     showPwd() {
       if (this.pwdType === 'password') {
