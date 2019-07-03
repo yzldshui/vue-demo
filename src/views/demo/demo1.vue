@@ -11,7 +11,11 @@
             <el-select v-model="form['eq'+(index+1)]" :placeholder="p" filterable class="select-width" clearable>
               <el-option v-for="e in eqs[index]" :key="e.id" :label="e.name" :value="e.id"/>
             </el-select>
-            <el-checkbox v-model="form['jz'+(index+1)]">满精铸</el-checkbox>
+            <el-checkbox v-model="form['jz'+(index+1)]" class="mr-10">满精铸</el-checkbox>
+            <el-select v-model="form['ms'+(index+1)]" placeholder="脉石" filterable class="select-width" clearable>
+              <el-option v-for="t in tjList" :key="t" :label="t" :value="t"/>
+            </el-select>
+            <el-input-number v-model="form['msValue'+(index+1)]" :min="0" :max="3" controls-position="right" class="input-number-width" />
           </el-form-item>
           <el-form-item :key="'b'+index" label="猎魂">
             <!-- 主魂 -->
@@ -169,7 +173,17 @@ export default {
         by42: true,
         by5: true,
         by51: true,
-        by52: true
+        by52: true,
+        ms1: '',
+        ms2: '',
+        ms3: '',
+        ms4: '',
+        ms5: '',
+        msValue1: 0,
+        msValue2: 0,
+        msValue3: 0,
+        msValue4: 0,
+        msValue5: 0
       },
       horses: [
         { key: '', value: 0 }, { key: '', value: 0 }, { key: '', value: 0 }
@@ -260,6 +274,10 @@ export default {
           console.log()
         }
       })
+      // 脉石
+      if (tjName === this.form['ms' + (index + 1)]) {
+        r = r + this.form['msValue' + (index + 1)]
+      }
       return r
     },
     getPoint2(tjName, data) {
