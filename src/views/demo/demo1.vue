@@ -2,14 +2,27 @@
   <div class="app-container tool1">
     <div style="margin-bottom: 15px;">
       <el-button type="primary" size="small" @click="startCalc">计算</el-button>
+      <el-input v-model="saveName" size="small" style="width: 200px;" placeholder="存档名"/>
+      <el-button type="success" size="small" @click="save">保存</el-button>
+      <el-button type="warning" size="small" @click="load">读取</el-button>
+      <el-button type="success" size="small" @click="handleCopy(copyItem,$event)">导出</el-button>
+      <el-button type="warning" size="small" @click="openImport">导入</el-button>
     </div>
     <div :class="{'panel-collapse':isCollapse}" class="condition-panel">
       <div :class="{'rotato-180':!isCollapse}" class="expand-btn" @click="handleCollapse"><i class="el-icon-caret-bottom"/></div>
       <el-form ref="form" :model="form" label-width="40px" size="mini">
         <template v-for="(p,index) in posArr">
           <el-form-item :key="'a'+index" :label="p">
+            <!-- 装备 -->
             <el-select v-model="form['eq'+(index+1)]" :placeholder="p" filterable class="select-width" clearable>
-              <el-option v-for="e in eqs[index]" :key="e.id" :label="e.name" :value="e.id"/>
+              <el-option v-for="e in eqs[index]" :key="e.id" :label="e.name" :value="e.id">
+                <div style="width: 500px;display:flex;justify-content:space-between;" >
+                  <div style="font-weight:bold;width:200px;">{{ e.name }}</div>
+                  <div v-for="(t,index) in getEquipmentDiscribe(e, form['jz'+(index+1)])" :key="t+index" style="width:200px;">
+                    {{ t }}
+                  </div>
+                </div>
+              </el-option>
             </el-select>
             <el-checkbox v-model="form['jz'+(index+1)]" class="mr-10">满精铸</el-checkbox>
             <el-select v-model="form['ms'+(index+1)]" placeholder="脉石" filterable class="select-width" clearable>
@@ -20,19 +33,40 @@
           <el-form-item :key="'b'+index" label="猎魂">
             <!-- 主魂 -->
             <el-select v-model="form['lh'+(index+1)]" filterable class="select-width" placeholder="镶嵌魂" clearable @change="handleLhChange(form['lh'+(index+1)],index)">
-              <el-option v-for="e in lhs" :key="e.id" :label="e.name" :value="e.id"/>
+              <el-option v-for="e in lhs" :key="e.id" :label="e.name" :value="e.id">
+                <div style="width: 500px;display:flex;justify-content:space-between;" >
+                  <div style="font-weight:bold;width:200px;">{{ e.name }}</div>
+                  <div v-for="(t,index) in getLhDiscribe(e, form['by'+(index+1)], form['lv'+(index+1)])" :key="t+index" style="width:200px;">
+                    {{ t }}
+                  </div>
+                </div>
+              </el-option>
             </el-select>
             <el-input-number v-model="form['lv'+(index+1)]" :min="1" :max="5" controls-position="right" class="input-number-width" />
             <el-checkbox v-model="form['by'+(index+1)]">变异</el-checkbox>
             <!-- 圣契1 -->
             <el-select v-model="form['sq'+(index+1)+'1']" filterable clearable class="select-width" placeholder="圣契1">
-              <el-option v-for="e in sqs1[index]" :key="e.id" :label="e.name" :value="e.id"/>
+              <el-option v-for="e in sqs1[index]" :key="e.id" :label="e.name" :value="e.id">
+                <div style="width: 500px;display:flex;justify-content:space-between;" >
+                  <div style="font-weight:bold;width:200px;">{{ e.name }}</div>
+                  <div v-for="(t,index) in getSqDiscribe(e, form['by'+(index+1)]&&form['by'+(index+1)+'1'], form['lv'+(index+1)+1])" :key="t+index" style="width:200px;">
+                    {{ t }}
+                  </div>
+                </div>
+              </el-option>
             </el-select>
             <el-input-number v-model="form['lv'+(index+1)+1]" :min="1" :max="5" controls-position="right" class="input-number-width" />
             <el-checkbox v-model="form['by'+(index+1)+'1']">变异</el-checkbox>
             <!-- 圣契2 -->
             <el-select v-model="form['sq'+(index+1)+'2']" filterable clearable class="select-width" placeholder="圣契2">
-              <el-option v-for="e in sqs2[index]" :key="e.id" :label="e.name" :value="e.id"/>
+              <el-option v-for="e in sqs2[index]" :key="e.id" :label="e.name" :value="e.id">
+                <div style="width: 500px;display:flex;justify-content:space-between;">
+                  <div style="font-weight:bold;width:200px;">{{ e.name }}</div>
+                  <div v-for="(t,index) in getSqDiscribe(e, form['by'+(index+1)]&&form['by'+(index+1)+'2'], form['lv'+(index+1)+2])" :key="t+index" style="width:200px;">
+                    {{ t }}
+                  </div>
+                </div>
+              </el-option>
             </el-select>
             <el-input-number v-model="form['lv'+(index+1)+2]" :min="1" :max="5" controls-position="right" class="input-number-width" />
             <el-checkbox v-model="form['by'+(index+1)+'2']">变异</el-checkbox>
@@ -67,6 +101,7 @@
     <div>
       <el-table
         :data="list"
+        size="mini"
         border>
         <el-table-column
           prop="tj"
@@ -110,10 +145,51 @@
         />
       </el-table>
     </div>
+    <div v-if="showList2" style="margin-top:15px;">
+      <el-table
+        v-if="showList2"
+        :data="list2"
+        :span-method="tableSpanMethod"
+        :row-style="boldRow"
+        size="mini"
+        border>
+        <el-table-column
+          prop="tj"
+          label="特技"
+        />
+        <el-table-column
+          prop="value"
+          label="值"
+        />
+        <el-table-column
+          prop="name"
+          label="名称"
+        />
+        <el-table-column
+          prop="desc"
+          label="说明"
+          min-width="600"
+        />
+      </el-table>
+    </div>
+    <el-dialog
+      :visible.sync="showImport"
+      title="导入"
+      width="500"
+    >
+      <div>
+        <el-input v-model="importTxt" :rows="8" type="textarea"/>
+      </div>
+      <div slot="footer">
+        <el-button @click="showImport = false">取 消</el-button>
+        <el-button type="primary" @click="doImport">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
+import clip from '@/utils/clipboard' // use clipboard directly
 export default {
 
   data() {
@@ -212,7 +288,13 @@ export default {
       tjList: [],
       list: [],
       sqData: [],
-      isCollapse: false
+      isCollapse: false,
+      saveName: '',
+      copyItem: '',
+      showImport: false,
+      importTxt: '',
+      list2: [],
+      showList2: false
     }
   },
   mounted() {
@@ -223,6 +305,25 @@ export default {
   methods: {
     handleCollapse() {
       this.isCollapse = !this.isCollapse
+    },
+    handleCopy(data, event) {
+      const saveItem = {
+        form: this.form,
+        horses: this.horses,
+        rings: this.rings,
+        titles: this.titles
+      }
+      clip(JSON.stringify(saveItem), event)
+    },
+    openImport() {
+      this.importTxt = ''
+      this.showImport = true
+    },
+    doImport() {
+      if (!this.importTxt) {
+        return
+      }
+      this.loadAllInfo(this.importTxt)
     },
     initEqData() {
       const data = require('@/json/data1.json')
@@ -239,6 +340,37 @@ export default {
       const sqs = this.sqData.filter(item => item.pid === v)
       this.$set(this.sqs1, index, sqs)
       this.$set(this.sqs2, index, sqs)
+    },
+    getEquipmentDiscribe(eq, jzFlag) {
+      const temp = [0, 0, 0, 0, 0]
+      for (let i = 1; i <= 5; i++) {
+        temp[i - 1] = parseInt(eq['v' + i])
+        if (jzFlag) {
+          if (eq['t' + i] === eq.j1) {
+            temp[i - 1] += parseInt(eq.w1)
+          } else if (eq['t' + i] === eq.j2) {
+            temp[i - 1] += parseInt(eq.w2)
+          }
+        }
+      }
+      return [`${eq.t1}(${temp[0]})`, `${eq.t2}(${temp[1]})`, `${eq.t3}(${temp[2]})`, `${eq.t4}(${temp[3]})`, `${eq.t5}(${temp[4]})`]
+    },
+    getLhDiscribe(lh, by, lv) {
+      const temp = []
+      temp.push(`${lh.t1}(${lh.v1 - (5 - lv)})`)
+      temp.push(`${lh.t2}(${lh.v2 - (-5 + lv)})`)
+      if (by) {
+        temp.push(`${lh.t3}(${lh.v3 - (5 - lv)})`)
+      }
+      return temp
+    },
+    getSqDiscribe(lh, by, lv) {
+      const temp = []
+      temp.push(`${lh.t1}(${this.getSqValue(lv)})`)
+      if (by) {
+        temp.push(`${lh.t2}(${this.getSqValue(lv)})`)
+      }
+      return temp
     },
     startCalc() {
       const temp = []
@@ -262,7 +394,9 @@ export default {
         })
       }
       this.list = this.killEmpty(temp).filter(item => item.show)
+      this.list = this.list.sort((a, b) => b.sum - a.sum)
       // this.list = temp
+      this.initTable2()
     },
     getPoint(index, tjName, data) {
       let r = 0
@@ -345,7 +479,7 @@ export default {
     getSqValue(lv) {
       if (lv < 2) {
         return 1
-      } else if (lv < 3) {
+      } else if (lv < 4) {
         return 2
       } else if (lv < 5) {
         return 3
@@ -460,6 +594,105 @@ export default {
         r = r + parseInt(v[i])
       }
       return r
+    },
+    save() {
+      if (!this.saveName) {
+        this.$message.warning('输入存档名')
+        return
+      }
+      const saveItem = {
+        form: this.form,
+        horses: this.horses,
+        rings: this.rings,
+        titles: this.titles
+      }
+      localStorage.setItem(this.saveName, JSON.stringify(saveItem))
+    },
+    load() {
+      if (!this.saveName) {
+        this.$message.warning('输入存档名')
+        return
+      }
+      const t = localStorage.getItem(this.saveName)
+      this.loadAllInfo(t)
+    },
+    loadAllInfo(t) {
+      if (!t) {
+        return
+      }
+      t = JSON.parse(t)
+      this.form = t.form
+      this.horses = t.horses
+      this.rings = t.rings
+      this.titles = t.titles
+      for (let i = 0; i < 5; i++) {
+        this.handleLhChange(this.form['lh' + (i + 1)], i)
+      }
+      this.showImport = false
+    },
+    initTable2() {
+      const tjAll = require('@/json/tj_desc.json')
+      const tjDesc = tjAll.map(item => ({
+        tj: item.tj,
+        name: item.name,
+        value: item.value,
+        desc: item.desc
+      }))
+      const enableList = this.list.filter(item => item.sum <= -10 || item.sum >= 10)
+      let result = []
+      enableList.forEach(item => {
+        const tempArr = tjDesc.filter(tj => tj.tj === item.tj)
+        if (item.sum > 0) {
+          for (let i = 0; i < tempArr.length; i++) {
+            const v = parseInt(tempArr[i].value)
+            if (item.sum >= v && v > 0) {
+              tempArr[i].bold = true
+              break
+            }
+          }
+        } else {
+          for (let i = tempArr.length - 1; i >= 0; i--) {
+            const v = parseInt(tempArr[i].value)
+            if (item.sum <= v && v < 0) {
+              tempArr[i].bold = true
+              break
+            }
+          }
+        }
+        result = result.concat(tempArr)
+      })
+      for (let i = 0; i < result.length; i++) {
+        const ele = result[i]
+        if (i === 0) {
+          ele.span = result.filter(item => item.tj === ele.tj).length
+        } else {
+          if (ele.tj === result[i - 1].tj) {
+            ele.span = 0
+          } else {
+            ele.span = result.filter(item => item.tj === ele.tj).length
+          }
+        }
+      }
+      this.showList2 = false
+      this.list2 = result
+      setTimeout(() => {
+        this.showList2 = true
+      }, 300)
+    },
+    tableSpanMethod({ row, column, rowIndex, columnIndex }) {
+      if (columnIndex === 0) {
+        if (row.span > 0) {
+          return [row.span, 1]
+        } else {
+          return [0, 0]
+        }
+      }
+    },
+    boldRow({ row, rowIndex }) {
+      if (row.bold) {
+        return 'font-weight:bold;color:#409eff'
+      }
+      return ''
     }
   }
 }
