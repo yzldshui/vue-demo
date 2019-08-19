@@ -33,14 +33,19 @@
           <el-form-item :key="'b'+index" label="猎魂">
             <!-- 主魂 -->
             <el-select v-model="form['lh'+(index+1)]" filterable class="select-width" placeholder="镶嵌魂" clearable @change="handleLhChange(form['lh'+(index+1)],index)">
-              <el-option v-for="e in lhs" :key="e.id" :label="e.name" :value="e.id">
-                <div style="width: 500px;display:flex;justify-content:space-between;" >
-                  <div style="font-weight:bold;width:200px;">{{ e.name }}</div>
-                  <div v-for="(t,index) in getLhDiscribe(e, form['by'+(index+1)], form['lv'+(index+1)])" :key="t+index" style="width:200px;">
-                    {{ t }}
+              <el-option-group
+                v-for="group in lhsTree"
+                :key="group.label"
+                :label="group.label">
+                <el-option v-for="e in group.options" :key="e.id" :label="e.name" :value="e.id">
+                  <div style="width: 500px;display:flex;justify-content:space-between;" >
+                    <div style="font-weight:bold;width:200px;">{{ e.name }}</div>
+                    <div v-for="(t,index) in getLhDiscribe(e, form['by'+(index+1)], form['lv'+(index+1)])" :key="t+index" style="width:200px;">
+                      {{ t }}
+                    </div>
                   </div>
-                </div>
-              </el-option>
+                </el-option>
+              </el-option-group>
             </el-select>
             <el-input-number v-model="form['lv'+(index+1)]" :min="1" :max="5" controls-position="right" class="input-number-width" />
             <el-checkbox v-model="form['by'+(index+1)]">变异</el-checkbox>
@@ -284,6 +289,7 @@ export default {
         [], [], [], [], []
       ],
       lhs: [],
+      lhsTree: [],
       posArr: ['头盔', '胸甲', '护肩', '护手', '腿甲'],
       tjList: [],
       list: [],
@@ -335,6 +341,18 @@ export default {
       const data = require('@/json/data2.json')
       this.sqData = require('@/json/data3.json')
       this.lhs = data
+      this.lhs.forEach(item => {
+        const group = this.lhsTree.find(item2 => item2.label === item.series)
+        if (!group) {
+          this.lhsTree.push({
+            label: item.series,
+            options: [item]
+          })
+        } else {
+          group.options.push(item)
+        }
+      })
+      console.log(this.lhsTree)
     },
     handleLhChange(v, index) {
       const sqs = this.sqData.filter(item => item.pid === v)
@@ -596,17 +614,25 @@ export default {
       return r
     },
     save() {
-      if (!this.saveName) {
+      if (!this.saveName || !this.saveName.trim()) {
         this.$message.warning('输入存档名')
         return
       }
-      const saveItem = {
-        form: this.form,
-        horses: this.horses,
-        rings: this.rings,
-        titles: this.titles
+      if (localStorage.getItem(this.saveName)) {
+        this.$confirm(`${this.saveName}已存在, 确定覆盖?`, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          const saveItem = {
+            form: this.form,
+            horses: this.horses,
+            rings: this.rings,
+            titles: this.titles
+          }
+          localStorage.setItem(this.saveName, JSON.stringify(saveItem))
+        }).catch(() => {})
       }
-      localStorage.setItem(this.saveName, JSON.stringify(saveItem))
     },
     load() {
       if (!this.saveName) {
